@@ -1,0 +1,106 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Respond.io
+providerId: respond
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- Messaging
+- Omnichannel
+- Customer Conversations
+- WhatsApp
+- AI
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of respond.io spend. Respond.io bills a tiered monthly or annual
+  subscription (Starter, Growth, Advanced, Enterprise) that bundles a fixed
+  number of users and Monthly Active Contacts (MAC). The primary variable cost
+  driver is MAC overage, charged per 100 contacts beyond the included
+  allotment (about $12/100 on Growth and $15/100 on Advanced). Per-channel
+  messaging fees (e.g. WhatsApp conversation charges) and taxes are passed
+  through separately. The Developer API is included from the Growth tier up.
+notes: >-
+  Subscription prices, included MAC, and overage rates are subject to change;
+  verify against the respond.io pricing page and any signed order form during
+  reconciliation. Channel pass-through costs depend on the connected providers.
+sources:
+- https://respond.io/pricing
+- https://respond.io/blog/respondio-pricing
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Respond.io
+serviceCategory: Customer Engagement and Messaging
+billingModel:
+  pricingCategory: Subscription-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: Respond.io
+  ServiceCategory: Customer Engagement and Messaging
+  ProviderName: Respond.io
+  PublisherName: Respond.io
+  InvoiceIssuerName: Respond.io
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Subscription-Based
+meters:
+- name: subscription
+  description: Recurring plan subscription fee per billing period (Starter / Growth / Advanced).
+  unit: subscription
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+- name: monthly_active_contacts
+  description: Contacts that sent or received a message in the billing month, counted against the plan's included MAC allotment.
+  unit: contacts
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+- name: mac_overage
+  description: MAC beyond the included allotment, billed per 100 contacts at the plan overage rate.
+  unit: contacts
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+- name: included_users
+  description: User seats bundled in the plan; additional seats billed separately where applicable.
+  unit: users
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+- name: channel_messaging
+  description: Pass-through messaging charges from connected channel providers (e.g. WhatsApp conversation fees).
+  unit: messages
+  aggregation: sum
+  dimensions:
+  - account
+  - channel
+principles:
+- name: Visibility
+  description: Track active MAC against the included allotment through the workspace billing/usage views to anticipate overage.
+- name: Allocation
+  description: Tag workspaces, channels, and teams to map subscription and MAC spend to internal cost centers.
+- name: Optimization
+  description: Right-size the plan tier to actual MAC and user needs; close or merge inactive contacts to reduce MAC; consolidate channels to limit pass-through fees.
+- name: Accountability
+  description: Assign workspace owners; review MAC trend and overage monthly against budget and renegotiate Enterprise terms at scale.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,154 @@
+aid: respond
+url: https://raw.githubusercontent.com/api-evangelist/respond/refs/heads/main/apis.yml
+name: Respond.io
+kind: company
+description: Respond.io is an AI-powered customer-conversation management platform that
+  unifies omnichannel messaging - WhatsApp, Messenger, Instagram, Telegram, SMS, email,
+  and website chat - into a single inbox. Its REST Developer API lets businesses manage
+  contacts, send and read messages across channels, manage conversations, post comments,
+  apply tags and custom fields, and subscribe to webhooks.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Messaging
+- Omnichannel
+- Customer Conversations
+- WhatsApp
+- AI
+created: '2026-06-20'
+modified: '2026-06-20'
+specificationVersion: '0.19'
+apis:
+- aid: respond:contacts
+  name: Respond.io Contacts API
+  tags:
+  - Contacts
+  - CRM
+  - Identity
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.respond.io/docs/api/c6e1aa937640e-contact
+  baseURL: https://api.respond.io/v2
+  properties:
+  - url: https://developers.respond.io/
+    type: Documentation
+  - url: https://developers.respond.io/docs/api/c6e1aa937640e-contact
+    type: APIReference
+  - url: openapi/respond-openapi.yml
+    type: OpenAPI
+  - url: collections/respond.postman_collection.json
+    type: PostmanCollection
+  description: Access, create, update, merge, list, and delete contacts. Contacts are
+    addressed by an identifier of the form id:{id}, email:{email}, or phone:{phone},
+    with support for tags, custom fields, lifecycle, and channel listing.
+- aid: respond:messages
+  name: Respond.io Messages API
+  tags:
+  - Messages
+  - Send
+  - Omnichannel
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.respond.io/docs/api/a748f5bfb1bb5-send-a-message
+  baseURL: https://api.respond.io/v2
+  properties:
+  - url: https://developers.respond.io/
+    type: Documentation
+  - url: https://developers.respond.io/docs/api/42fc125b57906-messaging
+    type: APIReference
+  - url: openapi/respond-openapi.yml
+    type: OpenAPI
+  - url: collections/respond.postman_collection.json
+    type: PostmanCollection
+  description: Send messages to a contact across any connected channel (text, attachment,
+    quick replies, WhatsApp template, email) and read individual messages or list a
+    contact's message history. Routes to the last interacted channel when channelId is
+    omitted.
+- aid: respond:conversations
+  name: Respond.io Conversations API
+  tags:
+  - Conversations
+  - Inbox
+  - Assignment
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.respond.io/docs/api/fd927d6437cf5-conversation
+  baseURL: https://api.respond.io/v2
+  properties:
+  - url: https://developers.respond.io/
+    type: Documentation
+  - url: https://developers.respond.io/docs/api/fd927d6437cf5-conversation
+    type: APIReference
+  - url: openapi/respond-openapi.yml
+    type: OpenAPI
+  - url: collections/respond.postman_collection.json
+    type: PostmanCollection
+  description: Open and close conversations for a contact, set conversation status, and
+    assign or unassign users (human agents or AI agents) to the conversation.
+- aid: respond:comments
+  name: Respond.io Comments API
+  tags:
+  - Comments
+  - Internal Notes
+  - Collaboration
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.respond.io/
+  baseURL: https://api.respond.io/v2
+  properties:
+  - url: https://developers.respond.io/
+    type: Documentation
+  - url: openapi/respond-openapi.yml
+    type: OpenAPI
+  - url: collections/respond.postman_collection.json
+    type: PostmanCollection
+  description: Create internal comments on a contact's conversation for team collaboration,
+    with support for mentioning users. Comments are not sent to the contact.
+- aid: respond:tags-custom-fields
+  name: Respond.io Tags and Custom Fields API
+  tags:
+  - Tags
+  - Custom Fields
+  - Metadata
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.respond.io/
+  baseURL: https://api.respond.io/v2
+  properties:
+  - url: https://developers.respond.io/
+    type: Documentation
+  - url: openapi/respond-openapi.yml
+    type: OpenAPI
+  - url: collections/respond.postman_collection.json
+    type: PostmanCollection
+  description: Manage workspace tags (create, update, delete) and add or remove them on
+    contacts, plus list and create custom fields used to store structured contact metadata.
+- aid: respond:webhooks
+  name: Respond.io Webhooks API
+  tags:
+  - Webhooks
+  - Events
+  - Notifications
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.respond.io/
+  baseURL: https://api.respond.io/v2
+  properties:
+  - url: https://developers.respond.io/
+    type: Documentation
+  - url: openapi/respond-openapi.yml
+    type: OpenAPI
+  - url: review.yml
+    type: Review
+  description: Subscribe to platform events (new message, message status, new contact,
+    conversation opened/closed) delivered to your server as structured JSON payloads
+    over HTTPS.
+common:
+- type: LinkedIn
+  url: https://www.linkedin.com/company/respond-io
+- type: Website
+  url: https://respond.io/
+- type: Documentation
+  url: https://developers.respond.io/
+- type: Plans
+  url: plans/respond-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/respond-rate-limits.yml
+- type: FinOps
+  url: finops/respond-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

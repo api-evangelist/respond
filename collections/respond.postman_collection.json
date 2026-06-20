@@ -1,0 +1,419 @@
+{
+  "item": [
+    {
+      "name": "Contacts",
+      "description": {
+        "content": "Create, read, update, merge, list, and delete contacts.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "Create a contact",
+          "request": {
+            "name": "Create a contact",
+            "url": {
+              "path": ["contact"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Ada\",\n  \"lastName\": \"Lovelace\",\n  \"email\": \"ada@example.com\",\n  \"phone\": \"+60123456789\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get a contact",
+          "request": {
+            "name": "Get a contact",
+            "url": {
+              "path": ["contact", ":identifier"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "identifier", "value": "phone:+60123456789" }
+              ]
+            },
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "name": "Update a contact",
+          "request": {
+            "name": "Update a contact",
+            "url": {
+              "path": ["contact", ":identifier"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "identifier", "value": "id:12345" }
+              ]
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Ada\",\n  \"language\": \"en\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete a contact",
+          "request": {
+            "name": "Delete a contact",
+            "url": {
+              "path": ["contact", ":identifier"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "identifier", "value": "id:12345" }
+              ]
+            },
+            "method": "DELETE"
+          },
+          "response": []
+        },
+        {
+          "name": "List contacts",
+          "request": {
+            "name": "List contacts",
+            "url": {
+              "path": ["contact", "list"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                { "key": "limit", "value": "10" }
+              ],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "name": "Merge contacts",
+          "request": {
+            "name": "Merge contacts",
+            "url": {
+              "path": ["contact", "merge"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"primaryContactId\": 12345,\n  \"secondaryContactId\": 67890\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List a contact's channels",
+          "request": {
+            "name": "List a contact's channels",
+            "url": {
+              "path": ["contact", ":identifier", "channel"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "identifier", "value": "id:12345" }
+              ]
+            },
+            "method": "GET"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Messages",
+      "description": {
+        "content": "Send messages to a contact and read message history.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "Send a message",
+          "request": {
+            "name": "Send a message",
+            "url": {
+              "path": ["contact", ":identifier", "message"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "identifier", "value": "phone:+60123456789" }
+              ]
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"channelId\": 123,\n  \"message\": {\n    \"type\": \"text\",\n    \"text\": \"Hello from respond.io\"\n  }\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get a message",
+          "request": {
+            "name": "Get a message",
+            "url": {
+              "path": ["contact", ":identifier", "message", ":messageId"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "identifier", "value": "id:12345" },
+                { "key": "messageId", "value": "98765" }
+              ]
+            },
+            "method": "GET"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Conversations",
+      "description": {
+        "content": "Open, close, status, and assign conversations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "Open or close a conversation",
+          "request": {
+            "name": "Open or close a conversation",
+            "url": {
+              "path": ["contact", ":identifier", "conversation"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "identifier", "value": "id:12345" }
+              ]
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"close\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Assign or unassign a conversation",
+          "request": {
+            "name": "Assign or unassign a conversation",
+            "url": {
+              "path": ["contact", ":identifier", "conversation", "assignee"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "identifier", "value": "id:12345" }
+              ]
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assignee\": \"email:agent@example.com\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Comments",
+      "description": {
+        "content": "Internal collaboration comments on a contact.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "Create a comment",
+          "request": {
+            "name": "Create a comment",
+            "url": {
+              "path": ["contact", ":identifier", "comment"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "identifier", "value": "id:12345" }
+              ]
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"Following up @[agent@example.com]\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Tags and Custom Fields",
+      "description": {
+        "content": "Workspace tags, contact tag assignment, and custom fields.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "Add tags to a contact",
+          "request": {
+            "name": "Add tags to a contact",
+            "url": {
+              "path": ["contact", ":identifier", "tag"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "identifier", "value": "id:12345" }
+              ]
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  \"vip\",\n  \"newsletter\"\n]",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove tags from a contact",
+          "request": {
+            "name": "Remove tags from a contact",
+            "url": {
+              "path": ["contact", ":identifier", "tag"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "identifier", "value": "id:12345" }
+              ]
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "method": "DELETE",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  \"vip\"\n]",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create a tag",
+          "request": {
+            "name": "Create a tag",
+            "url": {
+              "path": ["tag"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"vip\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List custom fields",
+          "request": {
+            "name": "List custom fields",
+            "url": {
+              "path": ["custom_field"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "name": "Create a custom field",
+          "request": {
+            "name": "Create a custom field",
+            "url": {
+              "path": ["custom_field"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"account_tier\",\n  \"type\": \"list\",\n  \"options\": [\"free\", \"pro\"]\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [],
+  "variable": [
+    { "type": "string", "value": "https://api.respond.io/v2", "key": "baseUrl" }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      { "key": "token", "value": "{{bearerToken}}" }
+    ]
+  },
+  "info": {
+    "_postman_id": "b7e3a1c2-9d44-4f0a-8c21-2e5f7a9b1d63",
+    "name": "Respond.io Developer API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the respond.io omnichannel customer-conversation management platform. Contacts, messages, conversations, comments, tags, and custom fields.\n\nContact Support:\n Name: Respond.io Support\n URL: https://developers.respond.io/",
+      "type": "text/plain"
+    }
+  }
+}

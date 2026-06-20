@@ -1,0 +1,61 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Respond.io
+providerId: respond
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- Messaging
+- Omnichannel
+- Customer Conversations
+- WhatsApp
+- AI
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  The respond.io Developer API limits each API call method to 5 requests per
+  second. When the limit is exceeded the API returns HTTP 429 (Too Many
+  Requests) with a Retry-After header indicating how long to wait. Enterprise
+  agreements can negotiate higher API limits. Per-channel messaging is
+  additionally subject to the upstream channel provider's limits (for example
+  WhatsApp Business Platform messaging tiers), which are not reconciled here.
+notes: >-
+  The 5 req/s per-method limit is documented; verify whether it is per token,
+  per workspace, or per method endpoint and confirm any per-channel or
+  Enterprise overrides during reconciliation.
+sources:
+- https://developers.respond.io/
+- https://respond.io/help/integrations/developer-api
+responseCodes:
+  throttled: 429
+limits:
+- name: Requests Per Second (per method)
+  scope: method
+  metric: requests
+  limit: 5
+  notes: Each API call method is limited to 5 requests per second.
+- name: Channel Messaging Limits
+  scope: channel
+  metric: messages
+  limit: see channel provider documentation
+  notes: >-
+    Outbound messaging is also bounded by the connected channel provider's
+    limits (e.g. WhatsApp messaging tiers, Messenger policies).
+- name: Enterprise API Limits
+  scope: account
+  metric: requests
+  limit: negotiated
+  notes: Enterprise plans can negotiate higher API limits.
+policies:
+- name: Retry-After Header
+  description: >-
+    On 429 responses the API returns a Retry-After header; clients should wait
+    the indicated duration before retrying.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

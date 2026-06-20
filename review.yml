@@ -1,0 +1,82 @@
+aid: respond
+name: Respond.io
+review:
+  question: Does Respond.io expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-20'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    Respond.io's only documented event-delivery mechanism is outbound HTTP
+    webhooks (server push of JSON payloads over HTTPS), configured in the
+    workspace. Webhooks are request/response HTTP callbacks, not a streaming
+    transport, so no AsyncAPI document was authored. No HTTP Server-Sent
+    Events (SSE) stream and no WebSocket surface are documented for the
+    Developer API as of the review date.
+findings:
+  summary: |
+    Respond.io does not publish a documented public WebSocket API. The
+    Developer API is a REST (HTTPS) API under https://api.respond.io/v2,
+    authenticated with a Bearer API Access Token, returning JSON. Real-time
+    event notification is delivered through outbound webhooks that push
+    structured JSON payloads to a customer-configured HTTPS endpoint. There
+    is no documented bidirectional or streaming WebSocket (ws:// or wss://)
+    endpoint for messages, conversations, or contacts.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.respond.io/v2
+      documented: true
+    - protocol: Webhook
+      scheme: https
+      note: Outbound HTTP webhooks push event JSON (new message, message status, new contact, conversation events) to a customer server. One-way HTTP callbacks, not WebSocket.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in the respond.io Developer API reference or help center as of the review date.
+  endpointsConfirmedRest:
+    - POST   https://api.respond.io/v2/contact
+    - GET    https://api.respond.io/v2/contact/{identifier}
+    - PUT    https://api.respond.io/v2/contact/{identifier}
+    - DELETE https://api.respond.io/v2/contact/{identifier}
+    - GET    https://api.respond.io/v2/contact/list
+    - POST   https://api.respond.io/v2/contact/merge
+    - POST   https://api.respond.io/v2/contact/{identifier}/tag
+    - DELETE https://api.respond.io/v2/contact/{identifier}/tag
+    - POST   https://api.respond.io/v2/contact/{identifier}/message
+    - GET    https://api.respond.io/v2/contact/{identifier}/message/{messageId}
+    - POST   https://api.respond.io/v2/contact/{identifier}/conversation
+    - POST   https://api.respond.io/v2/contact/{identifier}/comment
+    - POST   https://api.respond.io/v2/tag
+    - GET    https://api.respond.io/v2/custom_field
+  webhooks:
+    documented: true
+    delivery: HTTPS POST
+    payload: JSON
+    events:
+      - message.received
+      - message.sent
+      - message.status.updated
+      - contact.created
+      - contact.updated
+      - conversation.opened
+      - conversation.closed
+    note: Event names are representative of the documented webhook categories; verify exact event keys in the developer console during reconciliation.
+sources:
+  - url: https://developers.respond.io/
+    type: Documentation
+    note: API v2 reference; REST base URL https://api.respond.io/v2, Bearer auth, JSON. No WebSocket mentioned.
+  - url: https://developers.respond.io/docs/api/a748f5bfb1bb5-send-a-message
+    type: APIReference
+    note: Send-a-message is a POST REST call to a contact; routes to a channel by channelId.
+  - url: https://respond.io/help/integrations/developer-api
+    type: Documentation
+    note: Developer API available on Growth plan and above; 5 requests per second per method; uses Bearer access token.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No streaming or WebSocket protocol surface exists. Event delivery is via
+    outbound HTTP webhooks only, which are modeled as a Webhooks API in
+    apis.yml rather than as an AsyncAPI streaming document.

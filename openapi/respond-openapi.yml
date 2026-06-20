@@ -1,0 +1,786 @@
+openapi: 3.0.1
+info:
+  title: Respond.io Developer API
+  description: >-
+    REST API for the respond.io omnichannel customer-conversation management
+    platform. Manage contacts, send and read messages across connected channels,
+    open and close conversations, assign users, post internal comments, manage
+    tags and custom fields, and configure webhooks. Requests and responses are
+    JSON. Contacts are addressed by an identifier of the form `id:{id}`,
+    `email:{email}`, or `phone:{phone}`.
+  termsOfService: https://respond.io/terms-and-conditions
+  contact:
+    name: Respond.io Support
+    url: https://developers.respond.io/
+  version: '2.0'
+servers:
+  - url: https://api.respond.io/v2
+security:
+  - bearerAuth: []
+tags:
+  - name: Contacts
+    description: Create, read, update, merge, list, and delete contacts.
+  - name: Messages
+    description: Send messages to contacts and read message history.
+  - name: Conversations
+    description: Open, close, status, and assign conversations.
+  - name: Comments
+    description: Internal collaboration comments on a contact.
+  - name: Tags
+    description: Workspace tags and contact tag assignment.
+  - name: Custom Fields
+    description: Structured contact metadata definitions.
+paths:
+  /contact:
+    post:
+      operationId: createContact
+      tags:
+        - Contacts
+      summary: Create a contact
+      description: Creates a new contact in the workspace.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactCreate'
+      responses:
+        '200':
+          description: Contact created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /contact/create_or_update/{identifier}:
+    post:
+      operationId: createOrUpdateContact
+      tags:
+        - Contacts
+      summary: Create or update a contact
+      description: >-
+        Creates a contact if none matches the identifier, otherwise updates the
+        existing contact.
+      parameters:
+        - $ref: '#/components/parameters/Identifier'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactCreate'
+      responses:
+        '200':
+          description: Contact created or updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /contact/list:
+    get:
+      operationId: listContacts
+      tags:
+        - Contacts
+      summary: List contacts
+      description: Returns a paginated list of contacts in the workspace.
+      parameters:
+        - name: cursorId
+          in: query
+          description: Cursor id for pagination.
+          required: false
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: Number of records to return (max 100).
+          required: false
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: A list of contacts.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Contact'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /contact/{identifier}:
+    get:
+      operationId: getContact
+      tags:
+        - Contacts
+      summary: Get a contact
+      description: Retrieves a single contact by identifier.
+      parameters:
+        - $ref: '#/components/parameters/Identifier'
+      responses:
+        '200':
+          description: The contact.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    put:
+      operationId: updateContact
+      tags:
+        - Contacts
+      summary: Update a contact
+      description: Updates the fields of an existing contact.
+      parameters:
+        - $ref: '#/components/parameters/Identifier'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactCreate'
+      responses:
+        '200':
+          description: Contact updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    delete:
+      operationId: deleteContact
+      tags:
+        - Contacts
+      summary: Delete a contact
+      description: Permanently deletes a contact from the workspace.
+      parameters:
+        - $ref: '#/components/parameters/Identifier'
+      responses:
+        '200':
+          description: Contact deleted.
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /contact/merge:
+    post:
+      operationId: mergeContacts
+      tags:
+        - Contacts
+      summary: Merge contacts
+      description: >-
+        Merges a secondary contact into a primary contact, consolidating
+        conversations, tags, and fields onto the primary.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - primaryContactId
+                - secondaryContactId
+              properties:
+                primaryContactId:
+                  type: integer
+                  description: Id of the contact to keep.
+                secondaryContactId:
+                  type: integer
+                  description: Id of the contact merged into the primary.
+      responses:
+        '200':
+          description: Contacts merged.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /contact/{identifier}/tag:
+    post:
+      operationId: addContactTags
+      tags:
+        - Tags
+      summary: Add tags to a contact
+      description: Adds one or more tags to a contact.
+      parameters:
+        - $ref: '#/components/parameters/Identifier'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+              example:
+                - vip
+                - newsletter
+      responses:
+        '200':
+          description: Tags added.
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    delete:
+      operationId: removeContactTags
+      tags:
+        - Tags
+      summary: Remove tags from a contact
+      description: Removes one or more tags from a contact.
+      parameters:
+        - $ref: '#/components/parameters/Identifier'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+      responses:
+        '200':
+          description: Tags removed.
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /contact/{identifier}/channel:
+    get:
+      operationId: listContactChannels
+      tags:
+        - Contacts
+      summary: List a contact's channels
+      description: Lists the messaging channels a contact is reachable on.
+      parameters:
+        - $ref: '#/components/parameters/Identifier'
+      responses:
+        '200':
+          description: A list of channels.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Channel'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /contact/{identifier}/message:
+    post:
+      operationId: sendMessage
+      tags:
+        - Messages
+      summary: Send a message
+      description: >-
+        Sends a message to a contact through a specific channel. If channelId is
+        omitted, the message is sent through the last interacted channel.
+      parameters:
+        - $ref: '#/components/parameters/Identifier'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageSend'
+      responses:
+        '200':
+          description: Message accepted for delivery.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResult'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /contact/{identifier}/message/{messageId}:
+    get:
+      operationId: getMessage
+      tags:
+        - Messages
+      summary: Get a message
+      description: Retrieves a single message from a contact's conversation by message id.
+      parameters:
+        - $ref: '#/components/parameters/Identifier'
+        - name: messageId
+          in: path
+          required: true
+          description: The message identifier.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The message.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /contact/{identifier}/conversation:
+    post:
+      operationId: updateConversationStatus
+      tags:
+        - Conversations
+      summary: Open or close a conversation
+      description: Opens or closes the conversation for a contact.
+      parameters:
+        - $ref: '#/components/parameters/Identifier'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - status
+              properties:
+                status:
+                  type: string
+                  enum:
+                    - open
+                    - close
+                closingNoteId:
+                  type: integer
+                  description: Optional closing note applied when closing.
+      responses:
+        '200':
+          description: Conversation status updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /contact/{identifier}/conversation/assignee:
+    post:
+      operationId: assignConversation
+      tags:
+        - Conversations
+      summary: Assign or unassign a conversation
+      description: >-
+        Assigns a user (human or AI agent) to the contact's conversation, or
+        unassigns when assignee is null.
+      parameters:
+        - $ref: '#/components/parameters/Identifier'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                assignee:
+                  type: string
+                  nullable: true
+                  description: User identifier (email) to assign, or null to unassign.
+                  example: email:agent@example.com
+      responses:
+        '200':
+          description: Conversation assignment updated.
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /contact/{identifier}/comment:
+    post:
+      operationId: createComment
+      tags:
+        - Comments
+      summary: Create a comment
+      description: >-
+        Adds an internal comment to a contact's conversation. Comments support
+        mentioning users and are not delivered to the contact.
+      parameters:
+        - $ref: '#/components/parameters/Identifier'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - text
+              properties:
+                text:
+                  type: string
+                  description: Comment body. Use @[email] to mention a user.
+                  example: Following up @[agent@example.com]
+      responses:
+        '200':
+          description: Comment created.
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /tag:
+    post:
+      operationId: createTag
+      tags:
+        - Tags
+      summary: Create a tag
+      description: Creates a new workspace tag.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+      responses:
+        '200':
+          description: Tag created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /tag/{tagId}:
+    put:
+      operationId: updateTag
+      tags:
+        - Tags
+      summary: Update a tag
+      description: Updates an existing workspace tag.
+      parameters:
+        - name: tagId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+      responses:
+        '200':
+          description: Tag updated.
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    delete:
+      operationId: deleteTag
+      tags:
+        - Tags
+      summary: Delete a tag
+      description: Deletes a workspace tag.
+      parameters:
+        - name: tagId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Tag deleted.
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /custom_field:
+    get:
+      operationId: listCustomFields
+      tags:
+        - Custom Fields
+      summary: List custom fields
+      description: Lists all custom field definitions in the workspace.
+      responses:
+        '200':
+          description: A list of custom fields.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomField'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    post:
+      operationId: createCustomField
+      tags:
+        - Custom Fields
+      summary: Create a custom field
+      description: Creates a new custom field definition.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomField'
+      responses:
+        '200':
+          description: Custom field created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomField'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        API Access Token from Settings > Integrations > Developer API, sent in
+        the Authorization header as `Bearer {token}`.
+  parameters:
+    Identifier:
+      name: identifier
+      in: path
+      required: true
+      description: >-
+        Contact identifier in the form id:{id}, email:{email}, or phone:{phone}.
+      schema:
+        type: string
+      example: phone:+60123456789
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Too many requests. Limited to 5 requests per second per method.
+      headers:
+        Retry-After:
+          description: Seconds to wait before retrying.
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Contact:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: System-assigned contact id.
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        language:
+          type: string
+        profilePic:
+          type: string
+          format: uri
+        countryCode:
+          type: string
+        status:
+          type: string
+          description: Lifecycle stage of the contact.
+        assignee:
+          type: string
+          nullable: true
+        created:
+          type: integer
+          description: Unix timestamp when the contact was created.
+        tags:
+          type: array
+          items:
+            type: string
+        customFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomFieldValue'
+    ContactCreate:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        language:
+          type: string
+        profilePic:
+          type: string
+          format: uri
+        countryCode:
+          type: string
+        customFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomFieldValue'
+    CustomFieldValue:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+    CustomField:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - text
+            - number
+            - date
+            - list
+            - checkbox
+            - url
+        options:
+          type: array
+          items:
+            type: string
+          description: Allowed values when type is list.
+    Tag:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      required:
+        - name
+    Channel:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        source:
+          type: string
+          description: Channel source such as whatsapp, messenger, telegram, email, sms.
+        meta:
+          type: object
+          additionalProperties: true
+    MessageSend:
+      type: object
+      required:
+        - message
+      properties:
+        channelId:
+          type: integer
+          description: Target channel id. Omit to use the last interacted channel.
+        message:
+          $ref: '#/components/schemas/MessageContent'
+    MessageContent:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - text
+            - attachment
+            - quick_reply
+            - whatsapp_template
+        text:
+          type: string
+          description: Body text for type text or quick_reply.
+        attachment:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+                - image
+                - video
+                - audio
+                - file
+            url:
+              type: string
+              format: uri
+        quickReplies:
+          type: array
+          items:
+            type: object
+            properties:
+              title:
+                type: string
+              payload:
+                type: string
+        template:
+          type: object
+          description: WhatsApp template payload (name, languageCode, components).
+          additionalProperties: true
+    MessageResult:
+      type: object
+      properties:
+        messageId:
+          type: integer
+        status:
+          type: string
+          example: queued
+    Message:
+      type: object
+      properties:
+        messageId:
+          type: integer
+        contactId:
+          type: integer
+        channelId:
+          type: integer
+        traffic:
+          type: string
+          enum:
+            - incoming
+            - outgoing
+        message:
+          $ref: '#/components/schemas/MessageContent'
+        timestamp:
+          type: integer
+        status:
+          type: string
+          description: Delivery status (sent, delivered, read, failed).
+    Conversation:
+      type: object
+      properties:
+        contactId:
+          type: integer
+        status:
+          type: string
+          enum:
+            - open
+            - close
+        assignee:
+          type: string
+          nullable: true
+        opened:
+          type: integer
+        closed:
+          type: integer
+          nullable: true
+    Pagination:
+      type: object
+      properties:
+        cursorId:
+          type: integer
+          nullable: true
+        hasMore:
+          type: boolean
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer

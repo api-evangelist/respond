@@ -1,0 +1,207 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Respond.io
+providerId: respond
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- Messaging
+- Omnichannel
+- Customer Conversations
+- WhatsApp
+- AI
+- Plans
+description: >-
+  Respond.io sells tiered subscription plans (Starter, Growth, Advanced, and
+  Enterprise) billed monthly or annually, with a base allotment of included
+  users and Monthly Active Contacts (MAC). Contacts that send or receive a
+  message in a billing month count as MAC; usage beyond the included MAC is
+  charged as an overage. The Developer API is available on Growth and above.
+  Per-channel messaging costs (e.g. WhatsApp conversation fees) and applicable
+  taxes are passed through separately. Values below reflect publicly listed
+  annual pricing and are not reconciled against a signed quote.
+notes: >-
+  Prices and MAC allotments shown are representative of the respond.io pricing
+  page on annual billing and change over time; verify current tiers, included
+  users, included MAC, and overage rates on the pricing page during
+  reconciliation.
+sources:
+- https://respond.io/pricing
+- https://respond.io/blog/respondio-pricing
+- https://respond.io/help/integrations/developer-api
+plans:
+- id: respond-starter
+  name: Starter
+  type: subscription
+  description: >-
+    Entry inbox plan with included users and Monthly Active Contacts. No
+    broadcasts, workflows, AI Agents, or Developer API.
+  entries:
+  - label: Subscription
+    name: starter_subscription
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $79/month (annual)
+    userMultiplied: false
+  - label: Included Users
+    name: starter_users
+    type: included
+    metric: users
+    limit: 5
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Monthly Active Contacts
+    name: starter_mac
+    type: included
+    metric: contacts
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included allotment (see pricing page)
+    userMultiplied: false
+  elements:
+  - name: Omnichannel Inbox
+  - name: Contacts
+- id: respond-growth
+  name: Growth
+  type: subscription
+  description: >-
+    Adds broadcasts, workflows, AI Agents, Zapier integration, WhatsApp Calling,
+    and Developer API access, with 1,000 Monthly Active Contacts included.
+  entries:
+  - label: Subscription
+    name: growth_subscription
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $159/month (annual)
+    userMultiplied: false
+  - label: Included Users
+    name: growth_users
+    type: included
+    metric: users
+    limit: 10
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Included Monthly Active Contacts
+    name: growth_mac_included
+    type: included
+    metric: contacts
+    limit: 1000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: MAC Overage
+    name: growth_mac_overage
+    type: usage
+    metric: contacts
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 100
+    price: $12 per 100 MAC
+    userMultiplied: false
+  elements:
+  - name: Omnichannel Inbox
+  - name: Broadcasts
+  - name: Workflows
+  - name: AI Agents
+  - name: Developer API
+  - name: Zapier
+- id: respond-advanced
+  name: Advanced
+  type: subscription
+  description: >-
+    Adds SSO, Salesforce integration, multiple workspaces, HTTP requests in
+    workflows, and advanced reporting; 1,000 Monthly Active Contacts included.
+  entries:
+  - label: Subscription
+    name: advanced_subscription
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $279/month (annual)
+    userMultiplied: false
+  - label: Included Users
+    name: advanced_users
+    type: included
+    metric: users
+    limit: 10
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Included Monthly Active Contacts
+    name: advanced_mac_included
+    type: included
+    metric: contacts
+    limit: 1000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: MAC Overage
+    name: advanced_mac_overage
+    type: usage
+    metric: contacts
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 100
+    price: $15 per 100 MAC
+    userMultiplied: false
+  elements:
+  - name: Everything in Growth
+  - name: SSO
+  - name: Salesforce Integration
+  - name: Multiple Workspaces
+  - name: HTTP Requests in Workflows
+  - name: Advanced Reporting
+- id: respond-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Custom pricing with a dedicated success manager, higher API limits,
+    unlimited user seats, and custom MAC quotas. Contact respond.io sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Custom MAC Quotas
+  - name: Higher API Limits
+  - name: Unlimited Users
+  - name: Dedicated Success Manager
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
