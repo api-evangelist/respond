@@ -137,6 +137,12 @@ apis:
     conversation opened/closed) delivered to your server as structured JSON payloads
     over HTTPS.
 common:
+- type: TrustCenter
+  url: security/respond-trust-center.yml
+- type: DomainSecurity
+  url: security/respond-domain-security.yml
+- type: Authentication
+  url: authentication/respond-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/respond-io
 - type: Website
@@ -149,6 +155,8 @@ common:
   url: rate-limits/respond-rate-limits.yml
 - type: FinOps
   url: finops/respond-finops.yml
+- url: https://respond.io/blog/rss.xml
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
