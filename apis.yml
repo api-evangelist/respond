@@ -137,6 +137,8 @@ apis:
     conversation opened/closed) delivered to your server as structured JSON payloads
     over HTTPS.
 common:
+- type: AgenticAccess
+  url: agentic-access/respond-agentic-access.yml
 - type: TrustCenter
   url: security/respond-trust-center.yml
 - type: DomainSecurity
