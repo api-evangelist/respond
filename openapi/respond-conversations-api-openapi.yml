@@ -1,0 +1,131 @@
+openapi: 3.0.1
+info:
+  title: Respond.io Developer Comments Conversations API
+  description: REST API for the respond.io omnichannel customer-conversation management platform. Manage contacts, send and read messages across connected channels, open and close conversations, assign users, post internal comments, manage tags and custom fields, and configure webhooks. Requests and responses are JSON. Contacts are addressed by an identifier of the form `id:{id}`, `email:{email}`, or `phone:{phone}`.
+  termsOfService: https://respond.io/terms-and-conditions
+  contact:
+    name: Respond.io Support
+    url: https://developers.respond.io/
+  version: '2.0'
+servers:
+- url: https://api.respond.io/v2
+security:
+- bearerAuth: []
+tags:
+- name: Conversations
+  description: Open, close, status, and assign conversations.
+paths:
+  /contact/{identifier}/conversation:
+    post:
+      operationId: updateConversationStatus
+      tags:
+      - Conversations
+      summary: Open or close a conversation
+      description: Opens or closes the conversation for a contact.
+      parameters:
+      - $ref: '#/components/parameters/Identifier'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - status
+              properties:
+                status:
+                  type: string
+                  enum:
+                  - open
+                  - close
+                closingNoteId:
+                  type: integer
+                  description: Optional closing note applied when closing.
+      responses:
+        '200':
+          description: Conversation status updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /contact/{identifier}/conversation/assignee:
+    post:
+      operationId: assignConversation
+      tags:
+      - Conversations
+      summary: Assign or unassign a conversation
+      description: Assigns a user (human or AI agent) to the contact's conversation, or unassigns when assignee is null.
+      parameters:
+      - $ref: '#/components/parameters/Identifier'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                assignee:
+                  type: string
+                  nullable: true
+                  description: User identifier (email) to assign, or null to unassign.
+                  example: email:agent@example.com
+      responses:
+        '200':
+          description: Conversation assignment updated.
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  parameters:
+    Identifier:
+      name: identifier
+      in: path
+      required: true
+      description: Contact identifier in the form id:{id}, email:{email}, or phone:{phone}.
+      schema:
+        type: string
+      example: phone:+60123456789
+  schemas:
+    Conversation:
+      type: object
+      properties:
+        contactId:
+          type: integer
+        status:
+          type: string
+          enum:
+          - open
+          - close
+        assignee:
+          type: string
+          nullable: true
+        opened:
+          type: integer
+        closed:
+          type: integer
+          nullable: true
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
+  responses:
+    RateLimited:
+      description: Too many requests. Limited to 5 requests per second per method.
+      headers:
+        Retry-After:
+          description: Seconds to wait before retrying.
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API Access Token from Settings > Integrations > Developer API, sent in the Authorization header as `Bearer {token}`.

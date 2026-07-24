@@ -1,0 +1,79 @@
+openapi: 3.0.1
+info:
+  title: Respond.io Developer Comments API
+  description: REST API for the respond.io omnichannel customer-conversation management platform. Manage contacts, send and read messages across connected channels, open and close conversations, assign users, post internal comments, manage tags and custom fields, and configure webhooks. Requests and responses are JSON. Contacts are addressed by an identifier of the form `id:{id}`, `email:{email}`, or `phone:{phone}`.
+  termsOfService: https://respond.io/terms-and-conditions
+  contact:
+    name: Respond.io Support
+    url: https://developers.respond.io/
+  version: '2.0'
+servers:
+- url: https://api.respond.io/v2
+security:
+- bearerAuth: []
+tags:
+- name: Comments
+  description: Internal collaboration comments on a contact.
+paths:
+  /contact/{identifier}/comment:
+    post:
+      operationId: createComment
+      tags:
+      - Comments
+      summary: Create a comment
+      description: Adds an internal comment to a contact's conversation. Comments support mentioning users and are not delivered to the contact.
+      parameters:
+      - $ref: '#/components/parameters/Identifier'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - text
+              properties:
+                text:
+                  type: string
+                  description: Comment body. Use @[email] to mention a user.
+                  example: Following up @[agent@example.com]
+      responses:
+        '200':
+          description: Comment created.
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  parameters:
+    Identifier:
+      name: identifier
+      in: path
+      required: true
+      description: Contact identifier in the form id:{id}, email:{email}, or phone:{phone}.
+      schema:
+        type: string
+      example: phone:+60123456789
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
+  responses:
+    RateLimited:
+      description: Too many requests. Limited to 5 requests per second per method.
+      headers:
+        Retry-After:
+          description: Seconds to wait before retrying.
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API Access Token from Settings > Integrations > Developer API, sent in the Authorization header as `Bearer {token}`.

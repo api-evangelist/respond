@@ -1,0 +1,170 @@
+openapi: 3.0.1
+info:
+  title: Respond.io Developer Comments Tags API
+  description: REST API for the respond.io omnichannel customer-conversation management platform. Manage contacts, send and read messages across connected channels, open and close conversations, assign users, post internal comments, manage tags and custom fields, and configure webhooks. Requests and responses are JSON. Contacts are addressed by an identifier of the form `id:{id}`, `email:{email}`, or `phone:{phone}`.
+  termsOfService: https://respond.io/terms-and-conditions
+  contact:
+    name: Respond.io Support
+    url: https://developers.respond.io/
+  version: '2.0'
+servers:
+- url: https://api.respond.io/v2
+security:
+- bearerAuth: []
+tags:
+- name: Tags
+  description: Workspace tags and contact tag assignment.
+paths:
+  /contact/{identifier}/tag:
+    post:
+      operationId: addContactTags
+      tags:
+      - Tags
+      summary: Add tags to a contact
+      description: Adds one or more tags to a contact.
+      parameters:
+      - $ref: '#/components/parameters/Identifier'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+              example:
+              - vip
+              - newsletter
+      responses:
+        '200':
+          description: Tags added.
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    delete:
+      operationId: removeContactTags
+      tags:
+      - Tags
+      summary: Remove tags from a contact
+      description: Removes one or more tags from a contact.
+      parameters:
+      - $ref: '#/components/parameters/Identifier'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+      responses:
+        '200':
+          description: Tags removed.
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /tag:
+    post:
+      operationId: createTag
+      tags:
+      - Tags
+      summary: Create a tag
+      description: Creates a new workspace tag.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+      responses:
+        '200':
+          description: Tag created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /tag/{tagId}:
+    put:
+      operationId: updateTag
+      tags:
+      - Tags
+      summary: Update a tag
+      description: Updates an existing workspace tag.
+      parameters:
+      - name: tagId
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+      responses:
+        '200':
+          description: Tag updated.
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    delete:
+      operationId: deleteTag
+      tags:
+      - Tags
+      summary: Delete a tag
+      description: Deletes a workspace tag.
+      parameters:
+      - name: tagId
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Tag deleted.
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  parameters:
+    Identifier:
+      name: identifier
+      in: path
+      required: true
+      description: Contact identifier in the form id:{id}, email:{email}, or phone:{phone}.
+      schema:
+        type: string
+      example: phone:+60123456789
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
+    Tag:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      required:
+      - name
+  responses:
+    RateLimited:
+      description: Too many requests. Limited to 5 requests per second per method.
+      headers:
+        Retry-After:
+          description: Seconds to wait before retrying.
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API Access Token from Settings > Integrations > Developer API, sent in the Authorization header as `Bearer {token}`.
