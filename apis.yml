@@ -7,7 +7,20 @@ description: Respond.io is an AI-powered customer-conversation management platfo
   and website chat - into a single inbox. Its REST Developer API lets businesses manage
   contacts, send and read messages across channels, manage conversations, post comments,
   apply tags and custom fields, and subscribe to webhooks.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/respond.png
 tags:
 - Messaging
 - Omnichannel
@@ -18,124 +31,138 @@ created: '2026-06-20'
 modified: '2026-06-20'
 specificationVersion: '0.19'
 apis:
-- aid: respond:contacts
-  name: Respond.io Contacts API
-  tags:
-  - Contacts
-  - CRM
-  - Identity
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: respond:respond-comments-api
+  name: Respond.io Comments API
+  description: Internal collaboration comments on a contact.
   humanURL: https://developers.respond.io/docs/api/c6e1aa937640e-contact
   baseURL: https://api.respond.io/v2
-  properties:
-  - url: https://developers.respond.io/
-    type: Documentation
-  - url: https://developers.respond.io/docs/api/c6e1aa937640e-contact
-    type: APIReference
-  - url: openapi/respond-openapi.yml
-    type: OpenAPI
-  - url: collections/respond.postman_collection.json
-    type: PostmanCollection
-  description: Access, create, update, merge, list, and delete contacts. Contacts are
-    addressed by an identifier of the form id:{id}, email:{email}, or phone:{phone},
-    with support for tags, custom fields, lifecycle, and channel listing.
-- aid: respond:messages
-  name: Respond.io Messages API
-  tags:
-  - Messages
-  - Send
-  - Omnichannel
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developers.respond.io/docs/api/a748f5bfb1bb5-send-a-message
-  baseURL: https://api.respond.io/v2
-  properties:
-  - url: https://developers.respond.io/
-    type: Documentation
-  - url: https://developers.respond.io/docs/api/42fc125b57906-messaging
-    type: APIReference
-  - url: openapi/respond-openapi.yml
-    type: OpenAPI
-  - url: collections/respond.postman_collection.json
-    type: PostmanCollection
-  description: Send messages to a contact across any connected channel (text, attachment,
-    quick replies, WhatsApp template, email) and read individual messages or list a
-    contact's message history. Routes to the last interacted channel when channelId is
-    omitted.
-- aid: respond:conversations
-  name: Respond.io Conversations API
-  tags:
-  - Conversations
-  - Inbox
-  - Assignment
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developers.respond.io/docs/api/fd927d6437cf5-conversation
-  baseURL: https://api.respond.io/v2
-  properties:
-  - url: https://developers.respond.io/
-    type: Documentation
-  - url: https://developers.respond.io/docs/api/fd927d6437cf5-conversation
-    type: APIReference
-  - url: openapi/respond-openapi.yml
-    type: OpenAPI
-  - url: collections/respond.postman_collection.json
-    type: PostmanCollection
-  description: Open and close conversations for a contact, set conversation status, and
-    assign or unassign users (human agents or AI agents) to the conversation.
-- aid: respond:comments
-  name: Respond.io Comments API
   tags:
   - Comments
-  - Internal Notes
-  - Collaboration
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developers.respond.io/
-  baseURL: https://api.respond.io/v2
   properties:
-  - url: https://developers.respond.io/
-    type: Documentation
-  - url: openapi/respond-openapi.yml
-    type: OpenAPI
-  - url: collections/respond.postman_collection.json
-    type: PostmanCollection
-  description: Create internal comments on a contact's conversation for team collaboration,
-    with support for mentioning users. Comments are not sent to the contact.
-- aid: respond:tags-custom-fields
-  name: Respond.io Tags and Custom Fields API
+  - type: OpenAPI
+    url: openapi/respond-comments-api-openapi.yml
+  - type: Documentation
+    url: https://developers.respond.io/
+  - type: APIReference
+    url: https://developers.respond.io/docs/api/c6e1aa937640e-contact
+  - type: PostmanCollection
+    url: collections/respond.postman_collection.json
+  - type: APIReference
+    url: https://developers.respond.io/docs/api/42fc125b57906-messaging
+  - type: APIReference
+    url: https://developers.respond.io/docs/api/fd927d6437cf5-conversation
+  - type: Review
+    url: review.yml
+- aid: respond:respond-contacts-api
+  name: Respond.io Contacts API
+  description: Create, read, update, merge, list, and delete contacts.
+  humanURL: https://developers.respond.io/docs/api/c6e1aa937640e-contact
+  baseURL: https://api.respond.io/v2
+  tags:
+  - Contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/respond-contacts-api-openapi.yml
+  - type: Documentation
+    url: https://developers.respond.io/
+  - type: APIReference
+    url: https://developers.respond.io/docs/api/c6e1aa937640e-contact
+  - type: PostmanCollection
+    url: collections/respond.postman_collection.json
+  - type: APIReference
+    url: https://developers.respond.io/docs/api/42fc125b57906-messaging
+  - type: APIReference
+    url: https://developers.respond.io/docs/api/fd927d6437cf5-conversation
+  - type: Review
+    url: review.yml
+- aid: respond:respond-conversations-api
+  name: Respond.io Conversations API
+  description: Open, close, status, and assign conversations.
+  humanURL: https://developers.respond.io/docs/api/c6e1aa937640e-contact
+  baseURL: https://api.respond.io/v2
+  tags:
+  - Conversations
+  properties:
+  - type: OpenAPI
+    url: openapi/respond-conversations-api-openapi.yml
+  - type: Documentation
+    url: https://developers.respond.io/
+  - type: APIReference
+    url: https://developers.respond.io/docs/api/c6e1aa937640e-contact
+  - type: PostmanCollection
+    url: collections/respond.postman_collection.json
+  - type: APIReference
+    url: https://developers.respond.io/docs/api/42fc125b57906-messaging
+  - type: APIReference
+    url: https://developers.respond.io/docs/api/fd927d6437cf5-conversation
+  - type: Review
+    url: review.yml
+- aid: respond:respond-custom-fields-api
+  name: Respond.io Custom Fields API
+  description: Structured contact metadata definitions.
+  humanURL: https://developers.respond.io/docs/api/c6e1aa937640e-contact
+  baseURL: https://api.respond.io/v2
+  tags:
+  - Custom Fields
+  properties:
+  - type: OpenAPI
+    url: openapi/respond-custom-fields-api-openapi.yml
+  - type: Documentation
+    url: https://developers.respond.io/
+  - type: APIReference
+    url: https://developers.respond.io/docs/api/c6e1aa937640e-contact
+  - type: PostmanCollection
+    url: collections/respond.postman_collection.json
+  - type: APIReference
+    url: https://developers.respond.io/docs/api/42fc125b57906-messaging
+  - type: APIReference
+    url: https://developers.respond.io/docs/api/fd927d6437cf5-conversation
+  - type: Review
+    url: review.yml
+- aid: respond:respond-messages-api
+  name: Respond.io Messages API
+  description: Send messages to contacts and read message history.
+  humanURL: https://developers.respond.io/docs/api/c6e1aa937640e-contact
+  baseURL: https://api.respond.io/v2
+  tags:
+  - Messages
+  properties:
+  - type: OpenAPI
+    url: openapi/respond-messages-api-openapi.yml
+  - type: Documentation
+    url: https://developers.respond.io/
+  - type: APIReference
+    url: https://developers.respond.io/docs/api/c6e1aa937640e-contact
+  - type: PostmanCollection
+    url: collections/respond.postman_collection.json
+  - type: APIReference
+    url: https://developers.respond.io/docs/api/42fc125b57906-messaging
+  - type: APIReference
+    url: https://developers.respond.io/docs/api/fd927d6437cf5-conversation
+  - type: Review
+    url: review.yml
+- aid: respond:respond-tags-api
+  name: Respond.io Tags API
+  description: Workspace tags and contact tag assignment.
+  humanURL: https://developers.respond.io/docs/api/c6e1aa937640e-contact
+  baseURL: https://api.respond.io/v2
   tags:
   - Tags
-  - Custom Fields
-  - Metadata
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developers.respond.io/
-  baseURL: https://api.respond.io/v2
   properties:
-  - url: https://developers.respond.io/
-    type: Documentation
-  - url: openapi/respond-openapi.yml
-    type: OpenAPI
-  - url: collections/respond.postman_collection.json
-    type: PostmanCollection
-  description: Manage workspace tags (create, update, delete) and add or remove them on
-    contacts, plus list and create custom fields used to store structured contact metadata.
-- aid: respond:webhooks
-  name: Respond.io Webhooks API
-  tags:
-  - Webhooks
-  - Events
-  - Notifications
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developers.respond.io/
-  baseURL: https://api.respond.io/v2
-  properties:
-  - url: https://developers.respond.io/
-    type: Documentation
-  - url: openapi/respond-openapi.yml
-    type: OpenAPI
-  - url: review.yml
-    type: Review
-  description: Subscribe to platform events (new message, message status, new contact,
-    conversation opened/closed) delivered to your server as structured JSON payloads
-    over HTTPS.
+  - type: OpenAPI
+    url: openapi/respond-tags-api-openapi.yml
+  - type: Documentation
+    url: https://developers.respond.io/
+  - type: APIReference
+    url: https://developers.respond.io/docs/api/c6e1aa937640e-contact
+  - type: PostmanCollection
+    url: collections/respond.postman_collection.json
+  - type: APIReference
+    url: https://developers.respond.io/docs/api/42fc125b57906-messaging
+  - type: APIReference
+    url: https://developers.respond.io/docs/api/fd927d6437cf5-conversation
+  - type: Review
+    url: review.yml
 common:
 - type: AgenticAccess
   url: agentic-access/respond-agentic-access.yml
