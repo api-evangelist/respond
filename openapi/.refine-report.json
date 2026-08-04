@@ -1,0 +1,24 @@
+{
+  "provider": "respond",
+  "sources": [
+    "respond-comments-api-openapi.yml",
+    "respond-contacts-api-openapi.yml",
+    "respond-conversations-api-openapi.yml",
+    "respond-custom-fields-api-openapi.yml",
+    "respond-messages-api-openapi.yml",
+    "respond-tags-api-openapi.yml"
+  ],
+  "outputs": [
+    "respond-comments-api-openapi.yml",
+    "respond-contacts-api-openapi.yml",
+    "respond-conversations-api-openapi.yml",
+    "respond-custom-fields-api-openapi.yml",
+    "respond-messages-api-openapi.yml",
+    "respond-tags-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
