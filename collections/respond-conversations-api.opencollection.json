@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Respond.io Developer Comments Conversations API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Conversations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Open or close a conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.respond.io/v2/contact/:identifier/conversation",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "phone:+60123456789",
+                "type": "path",
+                "description": "Contact identifier in the form id:{id}, email:{email}, or phone:{phone}."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Opens or closes the conversation for a contact."
+        },
+        {
+          "info": {
+            "name": "Assign or unassign a conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.respond.io/v2/contact/:identifier/conversation/assignee",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "phone:+60123456789",
+                "type": "path",
+                "description": "Contact identifier in the form id:{id}, email:{email}, or phone:{phone}."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assigns a user (human or AI agent) to the contact's conversation, or unassigns when assignee is null."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

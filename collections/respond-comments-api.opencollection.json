@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Respond.io Developer Comments API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Comments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.respond.io/v2/contact/:identifier/comment",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "phone:+60123456789",
+                "type": "path",
+                "description": "Contact identifier in the form id:{id}, email:{email}, or phone:{phone}."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds an internal comment to a contact's conversation. Comments support mentioning users and are not delivered to the contact."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Respond.io Developer Comments Messages API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send a message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.respond.io/v2/contact/:identifier/message",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "phone:+60123456789",
+                "type": "path",
+                "description": "Contact identifier in the form id:{id}, email:{email}, or phone:{phone}."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends a message to a contact through a specific channel. If channelId is omitted, the message is sent through the last interacted channel."
+        },
+        {
+          "info": {
+            "name": "Get a message",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.respond.io/v2/contact/:identifier/message/:messageId",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "phone:+60123456789",
+                "type": "path",
+                "description": "Contact identifier in the form id:{id}, email:{email}, or phone:{phone}."
+              },
+              {
+                "name": "messageId",
+                "value": "",
+                "type": "path",
+                "description": "The message identifier."
+              }
+            ]
+          },
+          "docs": "Retrieves a single message from a contact's conversation by message id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

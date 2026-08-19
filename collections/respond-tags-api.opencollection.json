@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Respond.io Developer Comments Tags API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add tags to a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.respond.io/v2/contact/:identifier/tag",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "phone:+60123456789",
+                "type": "path",
+                "description": "Contact identifier in the form id:{id}, email:{email}, or phone:{phone}."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds one or more tags to a contact."
+        },
+        {
+          "info": {
+            "name": "Remove tags from a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.respond.io/v2/contact/:identifier/tag",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "phone:+60123456789",
+                "type": "path",
+                "description": "Contact identifier in the form id:{id}, email:{email}, or phone:{phone}."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes one or more tags from a contact."
+        },
+        {
+          "info": {
+            "name": "Create a tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.respond.io/v2/tag",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new workspace tag."
+        },
+        {
+          "info": {
+            "name": "Update a tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.respond.io/v2/tag/:tagId",
+            "params": [
+              {
+                "name": "tagId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing workspace tag."
+        },
+        {
+          "info": {
+            "name": "Delete a tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.respond.io/v2/tag/:tagId",
+            "params": [
+              {
+                "name": "tagId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a workspace tag."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

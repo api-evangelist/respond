@@ -1,0 +1,182 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Respond.io Developer Comments Contacts API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.respond.io/v2/contact",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new contact in the workspace."
+        },
+        {
+          "info": {
+            "name": "Create or update a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.respond.io/v2/contact/create_or_update/:identifier",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "phone:+60123456789",
+                "type": "path",
+                "description": "Contact identifier in the form id:{id}, email:{email}, or phone:{phone}."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a contact if none matches the identifier, otherwise updates the existing contact."
+        },
+        {
+          "info": {
+            "name": "List contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.respond.io/v2/contact/list",
+            "params": [
+              {
+                "name": "cursorId",
+                "value": "",
+                "type": "query",
+                "description": "Cursor id for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return (max 100)."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of contacts in the workspace."
+        },
+        {
+          "info": {
+            "name": "Get a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.respond.io/v2/contact/:identifier",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "phone:+60123456789",
+                "type": "path",
+                "description": "Contact identifier in the form id:{id}, email:{email}, or phone:{phone}."
+              }
+            ]
+          },
+          "docs": "Retrieves a single contact by identifier."
+        },
+        {
+          "info": {
+            "name": "Update a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.respond.io/v2/contact/:identifier",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "phone:+60123456789",
+                "type": "path",
+                "description": "Contact identifier in the form id:{id}, email:{email}, or phone:{phone}."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the fields of an existing contact."
+        },
+        {
+          "info": {
+            "name": "Delete a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.respond.io/v2/contact/:identifier",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "phone:+60123456789",
+                "type": "path",
+                "description": "Contact identifier in the form id:{id}, email:{email}, or phone:{phone}."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a contact from the workspace."
+        },
+        {
+          "info": {
+            "name": "Merge contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.respond.io/v2/contact/merge",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Merges a secondary contact into a primary contact, consolidating conversations, tags, and fields onto the primary."
+        },
+        {
+          "info": {
+            "name": "List a contact's channels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.respond.io/v2/contact/:identifier/channel",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "phone:+60123456789",
+                "type": "path",
+                "description": "Contact identifier in the form id:{id}, email:{email}, or phone:{phone}."
+              }
+            ]
+          },
+          "docs": "Lists the messaging channels a contact is reachable on."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

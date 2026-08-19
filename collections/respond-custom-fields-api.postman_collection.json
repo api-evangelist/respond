@@ -1,0 +1,324 @@
+{
+  "item": [
+    {
+      "id": "a95fd55b-b2c8-4e54-9309-a8678581ca74",
+      "name": "Custom Fields",
+      "description": {
+        "content": "Structured contact metadata definitions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c6300f72-2595-4ff9-bfaf-6109a115b202",
+          "name": "List custom fields",
+          "request": {
+            "name": "List custom fields",
+            "description": {
+              "content": "Lists all custom field definitions in the workspace.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom_field"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b61b093c-f67c-4d2f-9b83-4090005fed92",
+              "name": "A list of custom fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_field"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1969,\n    \"name\": \"string\",\n    \"type\": \"text\",\n    \"options\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"id\": 8940,\n    \"name\": \"string\",\n    \"type\": \"text\",\n    \"options\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6cb2892f-8432-4a2d-a55f-4869374e15d5",
+              "name": "Too many requests. Limited to 5 requests per second per method.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_field"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "9216"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": 2593\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "afc667fd-c7b0-4990-9272-fa970f2c5fca",
+          "name": "Create a custom field",
+          "request": {
+            "name": "Create a custom field",
+            "description": {
+              "content": "Creates a new custom field definition.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom_field"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"options\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3f49d7c9-175b-4b1e-922c-9427fe7efb9e",
+              "name": "Custom field created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_field"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"options\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"options\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "010b5372-fcaa-4a95-b1aa-6ae7cc457c08",
+              "name": "Too many requests. Limited to 5 requests per second per method.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_field"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"options\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "9216"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": 2593\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.respond.io/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5071016a-11e7-40ad-bec8-7dc6091f0ee4",
+    "name": "Respond.io Developer Comments Custom Fields API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the respond.io omnichannel customer-conversation management platform. Manage contacts, send and read messages across connected channels, open and close conversations, assign users, post internal comments, manage tags and custom fields, and configure webhooks. Requests and responses are JSON. Contacts are addressed by an identifier of the form `id:{id}`, `email:{email}`, or `phone:{phone}`.\n\nContact Support:\n Name: Respond.io Support",
+      "type": "text/plain"
+    }
+  }
+}

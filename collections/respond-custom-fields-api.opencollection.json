@@ -1,0 +1,50 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Respond.io Developer Comments Custom Fields API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Custom Fields",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List custom fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.respond.io/v2/custom_field"
+          },
+          "docs": "Lists all custom field definitions in the workspace."
+        },
+        {
+          "info": {
+            "name": "Create a custom field",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.respond.io/v2/custom_field",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new custom field definition."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

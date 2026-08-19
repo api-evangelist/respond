@@ -1,0 +1,223 @@
+{
+  "item": [
+    {
+      "id": "b456170e-e18c-49f9-85c6-e6337dcc6614",
+      "name": "Comments",
+      "description": {
+        "content": "Internal collaboration comments on a contact.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "43d065c9-1b00-4ad8-91e4-aa5f29958af2",
+          "name": "Create a comment",
+          "request": {
+            "name": "Create a comment",
+            "description": {
+              "content": "Adds an internal comment to a contact's conversation. Comments support mentioning users and are not delivered to the contact.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "contact",
+                ":identifier",
+                "comment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identifier",
+                  "description": "(Required) Contact identifier in the form id:{id}, email:{email}, or phone:{phone}."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a6a527f8-870c-4940-ad0d-05079b9ff105",
+              "name": "Comment created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    ":identifier",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identifier",
+                      "description": "(Required) Contact identifier in the form id:{id}, email:{email}, or phone:{phone}."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Following up @[agent@example.com]\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c5035f2e-0f4c-476c-833f-f836ab53013a",
+              "name": "Too many requests. Limited to 5 requests per second per method.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    ":identifier",
+                    "comment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identifier",
+                      "description": "(Required) Contact identifier in the form id:{id}, email:{email}, or phone:{phone}."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"Following up @[agent@example.com]\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "8808"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": 5527\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.respond.io/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d69116fa-916f-4b04-9085-17b8d1f26c00",
+    "name": "Respond.io Developer Comments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the respond.io omnichannel customer-conversation management platform. Manage contacts, send and read messages across connected channels, open and close conversations, assign users, post internal comments, manage tags and custom fields, and configure webhooks. Requests and responses are JSON. Contacts are addressed by an identifier of the form `id:{id}`, `email:{email}`, or `phone:{phone}`.\n\nContact Support:\n Name: Respond.io Support",
+      "type": "text/plain"
+    }
+  }
+}

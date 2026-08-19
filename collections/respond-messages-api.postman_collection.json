@@ -1,0 +1,469 @@
+{
+  "item": [
+    {
+      "id": "8c153505-5296-475a-a712-9fbd529054b6",
+      "name": "Messages",
+      "description": {
+        "content": "Send messages to contacts and read message history.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0273456c-b18b-4314-8dfb-06aebca80dab",
+          "name": "Send a message",
+          "request": {
+            "name": "Send a message",
+            "description": {
+              "content": "Sends a message to a contact through a specific channel. If channelId is omitted, the message is sent through the last interacted channel.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "contact",
+                ":identifier",
+                "message"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identifier",
+                  "description": "(Required) Contact identifier in the form id:{id}, email:{email}, or phone:{phone}."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": {\n    \"type\": \"<string>\",\n    \"text\": \"<string>\",\n    \"attachment\": {\n      \"type\": \"<string>\",\n      \"url\": \"<uri>\"\n    },\n    \"quickReplies\": [\n      {\n        \"title\": \"<string>\",\n        \"payload\": \"<string>\"\n      },\n      {\n        \"title\": \"<string>\",\n        \"payload\": \"<string>\"\n      }\n    ],\n    \"template\": {\n      \"key_0\": 7695,\n      \"key_1\": 24.204987654478096\n    }\n  },\n  \"channelId\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2b71d3c2-b575-4a6f-9f80-b78521fb4af3",
+              "name": "Message accepted for delivery.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    ":identifier",
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identifier",
+                      "description": "(Required) Contact identifier in the form id:{id}, email:{email}, or phone:{phone}."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": {\n    \"type\": \"<string>\",\n    \"text\": \"<string>\",\n    \"attachment\": {\n      \"type\": \"<string>\",\n      \"url\": \"<uri>\"\n    },\n    \"quickReplies\": [\n      {\n        \"title\": \"<string>\",\n        \"payload\": \"<string>\"\n      },\n      {\n        \"title\": \"<string>\",\n        \"payload\": \"<string>\"\n      }\n    ],\n    \"template\": {\n      \"key_0\": 5620.929852074623,\n      \"key_1\": false,\n      \"key_2\": 8091\n    }\n  },\n  \"channelId\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messageId\": 6976,\n  \"status\": \"queued\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9854871-8582-413a-af63-9d31168d71a5",
+              "name": "Too many requests. Limited to 5 requests per second per method.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    ":identifier",
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identifier",
+                      "description": "(Required) Contact identifier in the form id:{id}, email:{email}, or phone:{phone}."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": {\n    \"type\": \"<string>\",\n    \"text\": \"<string>\",\n    \"attachment\": {\n      \"type\": \"<string>\",\n      \"url\": \"<uri>\"\n    },\n    \"quickReplies\": [\n      {\n        \"title\": \"<string>\",\n        \"payload\": \"<string>\"\n      },\n      {\n        \"title\": \"<string>\",\n        \"payload\": \"<string>\"\n      }\n    ],\n    \"template\": {\n      \"key_0\": 5620.929852074623,\n      \"key_1\": false,\n      \"key_2\": 8091\n    }\n  },\n  \"channelId\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "1007"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": 7351\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ccd2b28-8274-4efd-8d69-f0dc924a50df",
+          "name": "Get a message",
+          "request": {
+            "name": "Get a message",
+            "description": {
+              "content": "Retrieves a single message from a contact's conversation by message id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "contact",
+                ":identifier",
+                "message",
+                ":messageId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "identifier",
+                  "description": "(Required) Contact identifier in the form id:{id}, email:{email}, or phone:{phone}."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "messageId",
+                  "description": "(Required) The message identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9c96c546-8e63-4a68-8c9f-f800f6fa5d66",
+              "name": "The message.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    ":identifier",
+                    "message",
+                    ":messageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identifier",
+                      "description": "(Required) Contact identifier in the form id:{id}, email:{email}, or phone:{phone}."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "messageId",
+                      "description": "(Required) The message identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messageId\": 4491,\n  \"contactId\": 3839,\n  \"channelId\": 1984,\n  \"traffic\": \"incoming\",\n  \"message\": {\n    \"type\": \"<string>\",\n    \"text\": \"<string>\",\n    \"attachment\": {\n      \"type\": \"<string>\",\n      \"url\": \"<uri>\"\n    },\n    \"quickReplies\": [\n      {\n        \"title\": \"<string>\",\n        \"payload\": \"<string>\"\n      },\n      {\n        \"title\": \"<string>\",\n        \"payload\": \"<string>\"\n      }\n    ],\n    \"template\": {\n      \"key_0\": 8589\n    }\n  },\n  \"timestamp\": 2808,\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9630074-6c0e-46c3-960e-69e05e5e0cd1",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    ":identifier",
+                    "message",
+                    ":messageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identifier",
+                      "description": "(Required) Contact identifier in the form id:{id}, email:{email}, or phone:{phone}."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "messageId",
+                      "description": "(Required) The message identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": 7351\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5bea0e2c-a552-4e8e-be56-5dddc4e94b3d",
+              "name": "Too many requests. Limited to 5 requests per second per method.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    ":identifier",
+                    "message",
+                    ":messageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "identifier",
+                      "description": "(Required) Contact identifier in the form id:{id}, email:{email}, or phone:{phone}."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "messageId",
+                      "description": "(Required) The message identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "1007"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": 7351\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.respond.io/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "700f2205-e56c-4815-bfaf-0100cbd68514",
+    "name": "Respond.io Developer Comments Messages API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the respond.io omnichannel customer-conversation management platform. Manage contacts, send and read messages across connected channels, open and close conversations, assign users, post internal comments, manage tags and custom fields, and configure webhooks. Requests and responses are JSON. Contacts are addressed by an identifier of the form `id:{id}`, `email:{email}`, or `phone:{phone}`.\n\nContact Support:\n Name: Respond.io Support",
+      "type": "text/plain"
+    }
+  }
+}
