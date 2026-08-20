@@ -26,6 +26,12 @@ tags:
 - Omnichannel
 - Customer Conversations
 - WhatsApp
+- Artificial Intelligence
+tags_raw:
+- Messaging
+- Omnichannel
+- Customer Conversations
+- WhatsApp
 - AI
 created: '2026-06-20'
 modified: '2026-06-20'
@@ -125,6 +131,8 @@ apis:
   humanURL: https://developers.respond.io/docs/api/c6e1aa937640e-contact
   baseURL: https://api.respond.io/v2
   tags:
+  - Message
+  tags_raw:
   - Messages
   properties:
   - type: OpenAPI
