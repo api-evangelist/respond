@@ -7,6 +7,18 @@ description: Respond.io is an AI-powered customer-conversation management platfo
   and website chat - into a single inbox. Its REST Developer API lets businesses manage
   contacts, send and read messages across channels, manage conversations, post comments,
   apply tags and custom fields, and subscribe to webhooks.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
