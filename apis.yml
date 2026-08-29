@@ -184,6 +184,9 @@ apis:
   - type: Review
     url: review.yml
 common:
+- type: CapabilityMap
+  url: capabilities/respond-capability-edges.yml
+  name: Respond.io Business Capability Map
 - type: AgenticAccess
   url: agentic-access/respond-agentic-access.yml
 - type: TrustCenter

@@ -1,0 +1,45 @@
+slug: respond
+provider: Respond.io
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Telecommunications
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Contacts
+  spec_file: respond-contacts-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.85
+  evidence: POST /contact/merge  mergeContacts  Merge contacts; GET /contact/list  listContacts
+  reason: Full CRUD plus merge over customer contact records with channel identifiers (id/email/phone)
+    — customer master data and identity resolution.
+- tag: Conversations
+  spec_file: respond-conversations-api-openapi.yml
+  capability_id: BC-430.10
+  capability_id_l1: BC-430
+  capability_name: Customer Inquiry Management
+  confidence: 0.8
+  evidence: POST /contact/{identifier}/conversation  updateConversationStatus  Open or close a conversation;
+    assignConversation  Assign or unassign a conversation
+  reason: Opening/closing and assigning customer conversations to users is inbound contact routing and
+    resolution in a customer-service inbox.
+- tag: Messages
+  spec_file: respond-messages-api-openapi.yml
+  capability_id: BC-430.10
+  capability_id_l1: BC-430
+  capability_name: Customer Inquiry Management
+  confidence: 0.7
+  evidence: POST /contact/{identifier}/message  sendMessage  Send a message; "unifies omnichannel messaging
+    ... into a single inbox"
+  reason: Operations send and read messages to/from contacts across WhatsApp, SMS, email etc. in a customer-conversation
+    platform — inbound/outbound customer contact handling, i.e. customer inquiry management. Not a network/telecom
+    messaging capability.
