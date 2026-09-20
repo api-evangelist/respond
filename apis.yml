@@ -185,6 +185,8 @@ apis:
   - type: Review
     url: review.yml
 common:
+- type: Pricing
+  url: https://respond.io/pricing
 - type: CapabilityMap
   url: capabilities/respond-capability-edges.yml
   name: Respond.io Business Capability Map
