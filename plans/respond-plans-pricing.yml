@@ -10,6 +10,11 @@ provenance:
   grounding: every price_text was found verbatim in the fetched page text
 audience: business-product
 pricing_basis: tiered-subscription
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-09-20'
+  managed_tier: starter
 published: true
 note: Page is a Builder.io JSON blob; monthly prices 99/199/349 (yearly 948/1908/3348) with '/month' and
   '/yr (billed yearly)' labels, '*Prices are in USD'. Pricing also scales by Monthly Active Contacts (selector
