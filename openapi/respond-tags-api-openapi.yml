@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Respond.io Developer Comments Tags API
+  title: Respond.io Developer Tags API
   description: REST API for the respond.io omnichannel customer-conversation management platform. Manage contacts, send and read messages across connected channels, open and close conversations, assign users, post internal comments, manage tags and custom fields, and configure webhooks. Requests and responses are JSON. Contacts are addressed by an identifier of the form `id:{id}`, `email:{email}`, or `phone:{phone}`.
   termsOfService: https://respond.io/terms-and-conditions
   contact:
@@ -134,6 +134,18 @@ components:
       schema:
         type: string
       example: phone:+60123456789
+  responses:
+    RateLimited:
+      description: Too many requests. Limited to 5 requests per second per method.
+      headers:
+        Retry-After:
+          description: Seconds to wait before retrying.
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -151,18 +163,6 @@ components:
           type: string
       required:
       - name
-  responses:
-    RateLimited:
-      description: Too many requests. Limited to 5 requests per second per method.
-      headers:
-        Retry-After:
-          description: Seconds to wait before retrying.
-          schema:
-            type: integer
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

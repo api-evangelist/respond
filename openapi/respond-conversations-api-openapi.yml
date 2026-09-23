@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Respond.io Developer Comments Conversations API
+  title: Respond.io Developer Conversations API
   description: REST API for the respond.io omnichannel customer-conversation management platform. Manage contacts, send and read messages across connected channels, open and close conversations, assign users, post internal comments, manage tags and custom fields, and configure webhooks. Requests and responses are JSON. Contacts are addressed by an identifier of the form `id:{id}`, `email:{email}`, or `phone:{phone}`.
   termsOfService: https://respond.io/terms-and-conditions
   contact:
@@ -67,8 +67,9 @@ paths:
               type: object
               properties:
                 assignee:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   description: User identifier (email) to assign, or null to unassign.
                   example: email:agent@example.com
       responses:
@@ -86,32 +87,6 @@ components:
       schema:
         type: string
       example: phone:+60123456789
-  schemas:
-    Conversation:
-      type: object
-      properties:
-        contactId:
-          type: integer
-        status:
-          type: string
-          enum:
-          - open
-          - close
-        assignee:
-          type: string
-          nullable: true
-        opened:
-          type: integer
-        closed:
-          type: integer
-          nullable: true
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
   responses:
     RateLimited:
       description: Too many requests. Limited to 5 requests per second per method.
@@ -124,6 +99,34 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
+    Conversation:
+      type: object
+      properties:
+        contactId:
+          type: integer
+        status:
+          type: string
+          enum:
+          - open
+          - close
+        assignee:
+          type:
+          - string
+          - 'null'
+        opened:
+          type: integer
+        closed:
+          type:
+          - integer
+          - 'null'
   securitySchemes:
     bearerAuth:
       type: http

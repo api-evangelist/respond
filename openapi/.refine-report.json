@@ -1,12 +1,7 @@
 {
   "provider": "respond",
   "sources": [
-    "respond-comments-api-openapi.yml",
-    "respond-contacts-api-openapi.yml",
-    "respond-conversations-api-openapi.yml",
-    "respond-custom-fields-api-openapi.yml",
-    "respond-messages-api-openapi.yml",
-    "respond-tags-api-openapi.yml"
+    "_original/respond-openapi.yml"
   ],
   "outputs": [
     "respond-comments-api-openapi.yml",
@@ -19,6 +14,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "respond-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "respond-comments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "respond-contacts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "respond-conversations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "respond-custom-fields-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "respond-messages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "respond-tags-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
