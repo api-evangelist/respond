@@ -43,6 +43,14 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
   parameters:
     Identifier:
       name: identifier
@@ -64,14 +72,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
   securitySchemes:
     bearerAuth:
       type: http

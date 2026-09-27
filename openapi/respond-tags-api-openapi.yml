@@ -125,6 +125,23 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
+  schemas:
+    Tag:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      required:
+      - name
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
   parameters:
     Identifier:
       name: identifier
@@ -146,23 +163,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
-    Tag:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-      required:
-      - name
   securitySchemes:
     bearerAuth:
       type: http
