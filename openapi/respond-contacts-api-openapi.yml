@@ -212,6 +212,13 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   schemas:
+    CustomFieldValue:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
     ContactCreate:
       type: object
       properties:
@@ -235,13 +242,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CustomFieldValue'
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
     Pagination:
       type: object
       properties:
@@ -251,13 +251,26 @@ components:
           - 'null'
         hasMore:
           type: boolean
-    CustomFieldValue:
+    Channel:
       type: object
       properties:
+        id:
+          type: integer
         name:
           type: string
-        value:
+        source:
           type: string
+          description: Channel source such as whatsapp, messenger, telegram, email, sms.
+        meta:
+          type: object
+          additionalProperties: true
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
     Contact:
       type: object
       properties:
@@ -298,19 +311,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CustomFieldValue'
-    Channel:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        source:
-          type: string
-          description: Channel source such as whatsapp, messenger, telegram, email, sms.
-        meta:
-          type: object
-          additionalProperties: true
   parameters:
     Identifier:
       name: identifier

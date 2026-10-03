@@ -125,23 +125,6 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  schemas:
-    Tag:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-      required:
-      - name
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
   parameters:
     Identifier:
       name: identifier
@@ -151,6 +134,23 @@ components:
       schema:
         type: string
       example: phone:+60123456789
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
+    Tag:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      required:
+      - name
   responses:
     RateLimited:
       description: Too many requests. Limited to 5 requests per second per method.

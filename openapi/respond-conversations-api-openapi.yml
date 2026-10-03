@@ -78,14 +78,16 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
+  parameters:
+    Identifier:
+      name: identifier
+      in: path
+      required: true
+      description: Contact identifier in the form id:{id}, email:{email}, or phone:{phone}.
+      schema:
+        type: string
+      example: phone:+60123456789
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
     Conversation:
       type: object
       properties:
@@ -106,15 +108,13 @@ components:
           type:
           - integer
           - 'null'
-  parameters:
-    Identifier:
-      name: identifier
-      in: path
-      required: true
-      description: Contact identifier in the form id:{id}, email:{email}, or phone:{phone}.
-      schema:
-        type: string
-      example: phone:+60123456789
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
   responses:
     RateLimited:
       description: Too many requests. Limited to 5 requests per second per method.

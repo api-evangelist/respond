@@ -56,13 +56,6 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
     CustomField:
       type: object
       properties:
@@ -84,6 +77,13 @@ components:
           items:
             type: string
           description: Allowed values when type is list.
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
   responses:
     RateLimited:
       description: Too many requests. Limited to 5 requests per second per method.
