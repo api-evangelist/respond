@@ -55,6 +55,18 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
+  responses:
+    RateLimited:
+      description: Too many requests. Limited to 5 requests per second per method.
+      headers:
+        Retry-After:
+          description: Seconds to wait before retrying.
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     CustomField:
       type: object
@@ -84,18 +96,6 @@ components:
           type: string
         status:
           type: integer
-  responses:
-    RateLimited:
-      description: Too many requests. Limited to 5 requests per second per method.
-      headers:
-        Retry-After:
-          description: Seconds to wait before retrying.
-          schema:
-            type: integer
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

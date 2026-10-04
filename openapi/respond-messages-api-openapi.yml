@@ -75,27 +75,6 @@ components:
         status:
           type: string
           example: queued
-    Message:
-      type: object
-      properties:
-        messageId:
-          type: integer
-        contactId:
-          type: integer
-        channelId:
-          type: integer
-        traffic:
-          type: string
-          enum:
-          - incoming
-          - outgoing
-        message:
-          $ref: '#/components/schemas/MessageContent'
-        timestamp:
-          type: integer
-        status:
-          type: string
-          description: Delivery status (sent, delivered, read, failed).
     MessageContent:
       type: object
       required:
@@ -137,13 +116,6 @@ components:
           type: object
           description: WhatsApp template payload (name, languageCode, components).
           additionalProperties: true
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: integer
     MessageSend:
       type: object
       required:
@@ -154,16 +126,41 @@ components:
           description: Target channel id. Omit to use the last interacted channel.
         message:
           $ref: '#/components/schemas/MessageContent'
-  parameters:
-    Identifier:
-      name: identifier
-      in: path
-      required: true
-      description: Contact identifier in the form id:{id}, email:{email}, or phone:{phone}.
-      schema:
-        type: string
-      example: phone:+60123456789
+    Message:
+      type: object
+      properties:
+        messageId:
+          type: integer
+        contactId:
+          type: integer
+        channelId:
+          type: integer
+        traffic:
+          type: string
+          enum:
+          - incoming
+          - outgoing
+        message:
+          $ref: '#/components/schemas/MessageContent'
+        timestamp:
+          type: integer
+        status:
+          type: string
+          description: Delivery status (sent, delivered, read, failed).
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
   responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     RateLimited:
       description: Too many requests. Limited to 5 requests per second per method.
       headers:
@@ -175,12 +172,15 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    Identifier:
+      name: identifier
+      in: path
+      required: true
+      description: Contact identifier in the form id:{id}, email:{email}, or phone:{phone}.
+      schema:
+        type: string
+      example: phone:+60123456789
   securitySchemes:
     bearerAuth:
       type: http
