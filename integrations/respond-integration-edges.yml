@@ -1,0 +1,18 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/respond/integrations
+- https://zapier.com/apps/respond-io/integrations
+- https://n8n.io/integrations/respond/
+- https://composio.dev/toolkits/respond
+- https://monid.ai/tools/respond
+checked:
+- https://composio.dev/toolkits/respond
+- https://monid.ai/tools/respond
+- https://n8n.io/integrations/respond/
+- https://zapier.com/apps/respond-io/integrations
+- https://zapier.com/apps/respond/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
